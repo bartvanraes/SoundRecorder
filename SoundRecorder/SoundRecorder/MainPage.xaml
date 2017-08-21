@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SoundRecorder"
+             xmlns:localConverters="clr-namespace:SoundRecorder.Converters"
+             x:Class="SoundRecorder.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <localConverters:InverseBoolConverter x:Key="inverter"/>    
+        </ResourceDictionary>        
+    </ContentPage.Resources>
+
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Font="Bold,38" BackgroundColor="Black"  Text="Accelerometer" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="X:" Grid.Row="1" Grid.Column="0"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding AccelerometerX, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="1" Grid.Column="1"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="1" Grid.Column="2"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding AccelerometerY, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="1" Grid.Column="3"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="1" Grid.Column="4"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding AccelerometerZ, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="1" Grid.Column="5"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,38" BackgroundColor="Black"  Text="Gyroscope" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="X:" Grid.Row="3" Grid.Column="0"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding GyroscopeX, StringFormat='{0:0.000}', Mode=OneWay}" Grid.Row="3" Grid.Column="1"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="3" Grid.Column="2"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding GyroscopeY, StringFormat='{0:0.000}', Mode=OneWay}" Grid.Row="3" Grid.Column="3"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="3" Grid.Column="4"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding GyroscopeZ, StringFormat='{0:0.000}', Mode=OneWay}" Grid.Row="3" Grid.Column="5"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,38" BackgroundColor="Black"  Text="Magnetic Field" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="X:" Grid.Row="5" Grid.Column="0"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding MagneticFieldX, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="5" Grid.Column="1"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="5" Grid.Column="2"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding MagneticFieldY, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="5" Grid.Column="3"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,24" BackgroundColor="Black" Text="Y:" Grid.Row="5" Grid.Column="4"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding MagneticFieldZ, StringFormat='{0:0.00}', Mode=OneWay}" Grid.Row="5" Grid.Column="5"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Button Text="Start" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartRecordingCommand}" IsEnabled="{Binding IsRecording, Converter={StaticResource inverter}}" />
+        <Button Text="Stop" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StopRecordingCommand}" IsEnabled="{Binding IsRecording}" />
+    </Grid>
+
+</ContentPage>

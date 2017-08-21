@@ -1,0 +1,16 @@
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\SoundRecorder.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\SoundRecorder.pdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Core.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Platform.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Xaml.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Core.pdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Core.xml
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Platform.pdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Xaml.pdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\bin\Debug\Xamarin.Forms.Xaml.xml
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.csproj.CoreCompileInputs.cache
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.MainPage.xaml.g.cs
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.App.xaml.g.cs
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.pdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder\obj\Debug\SoundRecorder.csprojResolveAssemblyReference.cache

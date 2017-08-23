@@ -26,6 +26,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -118,8 +120,16 @@
                TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" />
 
-        <Button Text="Start" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartRecordingCommand}" IsEnabled="{Binding IsRecording, Converter={StaticResource inverter}}" />
-        <Button Text="Stop" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StopRecordingCommand}" IsEnabled="{Binding IsRecording}" />
+        <Label Font="Bold,24" BackgroundColor="Black" Text="# Readings" Grid.Row="6" Grid.ColumnSpan="6"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Label Font="Bold,20" BackgroundColor="Black" Text="{Binding ReadingsCount, Mode=OneWay}" Grid.Row="7" Grid.Column="0"
+               TextColor="White" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+               LineBreakMode="NoWrap" />
+
+        <Button Text="Start" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartRecordingCommand}" IsEnabled="{Binding IsRecording, Converter={StaticResource inverter}}" />
+        <Button Text="Stop" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StopRecordingCommand}" IsEnabled="{Binding IsRecording}" />
     </Grid>
 
 </ContentPage>

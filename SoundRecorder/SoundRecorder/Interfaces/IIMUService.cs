@@ -17,10 +17,11 @@ namespace SoundRecorder.Interfaces
         public float MagneticFieldX { get; set; }
         public float MagneticFieldY { get; set; }
         public float MagneticFieldZ { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 
     public interface IIMUService
     {
-        Task<IMUReadings> GetReadings();
+        Task<IList<IMUReadings>> GetReadings();
     }
 }

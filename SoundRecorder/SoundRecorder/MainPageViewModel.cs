@@ -10,19 +10,37 @@ using SoundRecorder.Interfaces;
 using System.Threading;
 using System.Diagnostics;
 using SoundRecorder.Helpers;
+using SoundRecorder.DTO.Files;
+using SoundRecorder.Shared.Extensions;
 
 namespace SoundRecorder
 {
     public class MainPageViewModel : ViewModelBase
     {
         private float accelerometerX, accelerometerY, accelerometerZ, gyroscopeX, gyroscopeY, gyroscopeZ, magneticFieldX, magneticFieldY, magneticFieldZ;
+        private int readingsCount;
         private bool isRecording;
         private static CancellationTokenSource CancellationToken { get; set; }
 
         //public event PropertyChangedEventHandler PropertyChanged;
         public ICommand StartRecordingCommand { get; private set; }
-        public ICommand StopRecordingCommand { get; private set; }      
+        public ICommand StopRecordingCommand { get; private set; }
+
+        private IList<ImuDTO> imuDTOList;
         
+        public int ReadingsCount
+        {
+            get
+            {
+                return readingsCount;
+            }
+            set
+            {
+                readingsCount = value;
+                OnPropertyChanged("ReadingsCount");
+            }
+        }
+
         public bool IsRecording
         {
             get
@@ -203,6 +221,7 @@ namespace SoundRecorder
         {
             if (!IsRecording)
             {
+                imuDTOList = new List<ImuDTO>();
                 var service = DependencyService.Get<IIMUService>();
                 Task.Run(() => PollAccelerometer(service));                
             }            
@@ -221,20 +240,40 @@ namespace SoundRecorder
                     CancellationToken.Token.ThrowIfCancellationRequested();
 
                     var readings = await service.GetReadings();
+
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        AccelerometerX = readings.AccelerometerX;
-                        AccelerometerY = readings.AccelerometerY;
-                        AccelerometerZ = readings.AccelerometerZ;
-                        GyroscopeX = readings.GyroscopeX;
-                        GyroscopeY = readings.GyroscopeY;
-                        GyroscopeZ = readings.GyroscopeZ;
-                        MagneticFieldX = readings.MagneticFieldX;
-                        MagneticFieldY = readings.MagneticFieldY;
-                        MagneticFieldZ = readings.MagneticFieldZ;
+                        var lastReading = readings.Last();
+                        AccelerometerX = lastReading.AccelerometerX;
+                        AccelerometerY = lastReading.AccelerometerY;
+                        AccelerometerZ = lastReading.AccelerometerZ;
+                        GyroscopeX = lastReading.GyroscopeX;
+                        GyroscopeY = lastReading.GyroscopeY;
+                        GyroscopeZ = lastReading.GyroscopeZ;
+                        MagneticFieldX = lastReading.MagneticFieldX;
+                        MagneticFieldY = lastReading.MagneticFieldY;
+                        MagneticFieldZ = lastReading.MagneticFieldZ;
+                        ReadingsCount = readings.Count;
                     });
 
-                    await Task.Delay(10, CancellationToken.Token);
+                    readings.ForEach(x =>
+                    {
+                        imuDTOList.Add(new ImuDTO
+                        {
+                            AccelerometerX = x.AccelerometerX,
+                            AccelerometerY = x.AccelerometerY,
+                            AccelerometerZ = x.AccelerometerZ,
+                            GyroscopeX = x.GyroscopeX,
+                            GyroscopeY = x.GyroscopeY,
+                            GyroscopeZ = x.GyroscopeZ,
+                            MagneticFieldX = x.MagneticFieldX,
+                            MagneticFieldY = x.MagneticFieldY,
+                            MagneticFieldZ = x.MagneticFieldZ,
+                            TimeStamp = x.TimeStamp
+                        });
+                    });
+
+                    await Task.Delay(20, CancellationToken.Token);
 
                     /*await Task.Delay(100, CancellationToken.Token).ContinueWith(async (arg) =>
                     {
@@ -261,7 +300,21 @@ namespace SoundRecorder
             {
                 CancellationToken.Cancel();
                 IsRecording = false;
+
+                var fileService = DependencyService.Get<IFileService>();
+                var emailService = DependencyService.Get<IEmailService>();
+
+                Task.Run(() => SaveFileAndSendEmail(fileService, emailService));
             }
+        }
+
+        private async void SaveFileAndSendEmail(IFileService fileService, IEmailService emailService)
+        {
+            var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssfff") + ".xml";
+
+            var filePath = fileService.WriteFile(fileName, imuDTOList);
+
+            emailService.SendEmailWithAttachment("bart.vanraes@gmail.com", String.Format("Soundrecorder IMU file: {0}", fileName), String.Format("Soundrecorder IMU file: {0}", fileName), fileName);
         }
 
     }

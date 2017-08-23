@@ -11,7 +11,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundRecorder.UWP", "SoundR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundRecorder.iOS", "SoundRecorder\SoundRecorder.iOS\SoundRecorder.iOS.csproj", "{C0D86482-4C33-49DD-BB96-A1B1004834BA}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SoundRecorder.DTO", "SoundRecorder.DTO\SoundRecorder.DTO.shproj", "{FA89E2DD-07F3-4FAE-A2D7-0886727FC57C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SoundRecorder.Shared", "SoundRecorder.Shared\SoundRecorder.Shared.shproj", "{AE330592-57D1-43D7-8D18-AB2EF760AC3B}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SoundRecorder.DTO\SoundRecorder.DTO.projitems*{667c01a3-5fe0-43a7-a157-caa79eff7d4a}*SharedItemsImports = 4
+		SoundRecorder.Shared\SoundRecorder.Shared.projitems*{667c01a3-5fe0-43a7-a157-caa79eff7d4a}*SharedItemsImports = 4
+		SoundRecorder.Shared\SoundRecorder.Shared.projitems*{ae330592-57d1-43d7-8d18-ab2ef760ac3b}*SharedItemsImports = 13
+		SoundRecorder.DTO\SoundRecorder.DTO.projitems*{fa89e2dd-07f3-4fae-a2d7-0886727fc57c}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM

@@ -1,5 +1,8 @@
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\SoundRecorder.Android.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\BouncyCastle.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\FormsViewGroup.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\MailKit.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\MimeKit.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Android.Support.Animated.Vector.Drawable.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Android.Support.Annotations.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Android.Support.Compat.dll
@@ -24,10 +27,13 @@ D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\D
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Mono.Android.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\mscorlib.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Core.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Data.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Xml.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Xml.Linq.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\SoundRecorder.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Mono.Data.Sqlite.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Transactions.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Runtime.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.ComponentModel.Composition.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Collections.dll
@@ -51,6 +57,8 @@ D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\D
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Text.RegularExpressions.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Collections.Concurrent.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Runtime.InteropServices.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Numerics.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Mono.Data.Tds.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Mono.Security.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Resources.ResourceManager.dll
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\System.Diagnostics.Tools.dll

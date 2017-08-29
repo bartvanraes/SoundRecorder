@@ -8,7 +8,7 @@ namespace SoundRecorder.Interfaces
 {
     public interface ISoundRecorderService
     {
-        Task StartRecordingAsync();
-        void StopRecording();
+        Task StartRecordingAsync(Guid sessionId);
+        void StopRecording(Guid sessionId);
     }
 }

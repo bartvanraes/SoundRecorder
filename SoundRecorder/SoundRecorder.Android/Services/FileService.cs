@@ -20,10 +20,10 @@ namespace SoundRecorder.Droid.Services
 {
     public class FileService : IFileService
     {
-        public string WriteFile(string fileName, IList<ImuDTO> imuList)
+        public string WriteFile(Guid sessionId, IList<ImuDTO> imuList)
         {
             var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            var filePath = Path.Combine(documentsPath, fileName);
+            var filePath = Path.Combine(documentsPath, String.Format("{0}.xml", sessionId.ToString()));
 
             XmlSerializer serializer = new XmlSerializer(imuList.GetType());
             using (StreamWriter outputFile = new StreamWriter(filePath, true))
@@ -33,15 +33,6 @@ namespace SoundRecorder.Droid.Services
             }
 
             return filePath;
-
-            // TEST: Send an email
-            
-
-            /*var email = new Intent(Android.Content.Intent.ActionSend);
-            email.PutExtra(Android.Content.Intent.ExtraEmail, new string[] { "bart.vanraes@gmail.com" });
-            email.PutExtra(Android.Content.Intent.ExtraSubject, String.Format("Soundrecorder IMU file: {0}", fileName));*/
-
-
         }
     }
 }

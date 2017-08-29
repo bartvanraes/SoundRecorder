@@ -9,6 +9,6 @@ namespace SoundRecorder.Interfaces
 {
     public interface IFileService
     {
-        string WriteFile(string fileName, IList<ImuDTO> imuList);
+        string WriteFile(Guid sessionId, IList<ImuDTO> imuList);
     }
 }

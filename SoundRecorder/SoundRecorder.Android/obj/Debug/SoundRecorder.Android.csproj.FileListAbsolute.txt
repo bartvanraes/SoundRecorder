@@ -49,6 +49,11 @@ D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\D
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\Xamarin.Forms.Core.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\Xamarin.Forms.Platform.Android.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\Xamarin.Forms.Xaml.dll.mdb
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\BouncyCastle.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MailKit.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MimeKit.dll
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MailKit.xml
+D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MimeKit.xml
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\SoundRecorder.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\SoundRecorder.Android.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\FormsViewGroup.dll.mdb
@@ -57,8 +62,3 @@ D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\D
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Forms.Core.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
 D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb
-D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\BouncyCastle.dll
-D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MailKit.dll
-D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MimeKit.dll
-D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MailKit.xml
-D:\Projects\Professional\SoundRecorder\SoundRecorder\SoundRecorder.Android\bin\Debug\MimeKit.xml

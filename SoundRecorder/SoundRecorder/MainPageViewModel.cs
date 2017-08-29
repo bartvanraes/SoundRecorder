@@ -20,7 +20,9 @@ namespace SoundRecorder
         private float accelerometerX, accelerometerY, accelerometerZ, gyroscopeX, gyroscopeY, gyroscopeZ, magneticFieldX, magneticFieldY, magneticFieldZ;
         private int readingsCount;
         private bool isRecording;
-        private static CancellationTokenSource CancellationToken { get; set; }
+        private static CancellationTokenSource IMUCancellationToken { get; set; }
+        private static CancellationTokenSource AudioCancellationToken { get; set; }
+        private static Guid sessionId = Guid.Empty;
 
         //public event PropertyChangedEventHandler PropertyChanged;
         public ICommand StartRecordingCommand { get; private set; }
@@ -221,23 +223,46 @@ namespace SoundRecorder
         {
             if (!IsRecording)
             {
+                sessionId = Guid.NewGuid();
                 imuDTOList = new List<ImuDTO>();
-                var service = DependencyService.Get<IIMUService>();
-                Task.Run(() => PollAccelerometer(service));                
+                var imuService = DependencyService.Get<IIMUService>();
+                var recordingService = DependencyService.Get<ISoundRecorderService>();
+
+                Task.Run(() => PollAccelerometer(imuService));
+                Task.Run(() => StartAudioRecording(recordingService));
+                IsRecording = true;
             }            
+        }
+
+        private async void StartAudioRecording(ISoundRecorderService service)
+        {
+            AudioCancellationToken = new CancellationTokenSource();
+
+            try
+            {
+                AudioCancellationToken.Token.ThrowIfCancellationRequested();
+
+                await service.StartRecordingAsync(sessionId);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception: " + ex.Message);
+                IsRecording = false;
+            }
         }
 
         private async void PollAccelerometer(IIMUService service)
         {
-            IsRecording = true;
+            
 
-            CancellationToken = new CancellationTokenSource();
+            IMUCancellationToken = new CancellationTokenSource();
 
-            while (!CancellationToken.IsCancellationRequested)
+            while (!IMUCancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    CancellationToken.Token.ThrowIfCancellationRequested();
+                    IMUCancellationToken.Token.ThrowIfCancellationRequested();
 
                     var readings = await service.GetReadings();
 
@@ -256,6 +281,12 @@ namespace SoundRecorder
                         ReadingsCount = readings.Count;
                     });
 
+                    //TEST
+                    /*if(readings.Any(x => x.AccelerometerX > 20 || x.AccelerometerX < -20))
+                    {
+                        string test = "";
+                    }*/
+
                     readings.ForEach(x =>
                     {
                         imuDTOList.Add(new ImuDTO
@@ -273,7 +304,7 @@ namespace SoundRecorder
                         });
                     });
 
-                    await Task.Delay(20, CancellationToken.Token);
+                    await Task.Delay(20, IMUCancellationToken.Token);
 
                     /*await Task.Delay(100, CancellationToken.Token).ContinueWith(async (arg) =>
                     {
@@ -296,26 +327,36 @@ namespace SoundRecorder
 
         private void StopRecording()
         {
-            if(CancellationToken != null && IsRecording)
+            if(IMUCancellationToken != null && IsRecording)
             {
-                CancellationToken.Cancel();
+                IMUCancellationToken.Cancel();
+
+                var recordingService = DependencyService.Get<ISoundRecorderService>();
+                recordingService.StopRecording(sessionId);
+
                 IsRecording = false;
 
                 var fileService = DependencyService.Get<IFileService>();
-                var emailService = DependencyService.Get<IEmailService>();
+                var ftpService = DependencyService.Get<IFTPService>();
 
-                Task.Run(() => SaveFileAndSendEmail(fileService, emailService));
+                Task.Run(() => SaveFileAndUploadToFTP(fileService, ftpService));
             }
         }
 
-        private async void SaveFileAndSendEmail(IFileService fileService, IEmailService emailService)
+        private async void SaveFileAndUploadToFTP(IFileService fileService, IFTPService ftpService)
+        {
+            fileService.WriteFile(sessionId, imuDTOList);
+            await ftpService.UploadFilesToFTPServer("ftp://files.000webhost.com", sessionId, "bartvanraes", "Dommelke7437", "");
+        }
+
+        /*private async void SaveFileAndSendEmail(IFileService fileService, IEmailService emailService)
         {
             var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssfff") + ".xml";
 
             var filePath = fileService.WriteFile(fileName, imuDTOList);
 
             emailService.SendEmailWithAttachment("bart.vanraes@gmail.com", String.Format("Soundrecorder IMU file: {0}", fileName), String.Format("Soundrecorder IMU file: {0}", fileName), fileName);
-        }
+        }*/
 
     }
 }

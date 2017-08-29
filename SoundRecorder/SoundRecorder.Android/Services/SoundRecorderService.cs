@@ -14,36 +14,46 @@ using Android.Media;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using SoundRecorder.Droid.Services;
 
+[assembly: Xamarin.Forms.Dependency(typeof(SoundRecorderService))]
 namespace SoundRecorder.Droid.Services
 {
     public class SoundRecorderService : ISoundRecorderService
     {
         public Action<bool> RecordingStateChanged;
 
-        static string filePath = "/data/data/Example_WorkingWithAudio.Example_WorkingWithAudio/files/testAudio.mp4";
-        byte[] audioBuffer = null;
-        AudioRecord audioRecord = null;
-        bool endRecording = false;
-        bool isRecording = false;
+        private static string filePath; // = "/data/data/Example_WorkingWithAudio.Example_WorkingWithAudio/files/testAudio.wav";
+        private static string documentsPath;
+        private byte[] audioBuffer = null;
+        private AudioRecord audioRecord = null;
+        private bool endRecording = false;
+        private bool isRecording = false;
+
+        public SoundRecorderService()
+        {
+            documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        }
+
 
         public Boolean IsRecording
         {
             get { return (isRecording); }
         }
 
-        public async Task StartRecordingAsync()
+        public async Task StartRecordingAsync(Guid sessionId)
         {
+            filePath = Path.Combine(documentsPath, String.Format("{0}.mp4", sessionId.ToString()));
             await StartRecorderAsync();
         }
 
-        public void StopRecording()
+        public void StopRecording(Guid sessionId)
         {
             endRecording = true;
             Thread.Sleep(500); // Give it time to drop out.
         }
 
-        private  async Task ReadAudioAsync()
+        private async Task ReadAudioAsync()
         {
             using (var fileStream = new FileStream(filePath, System.IO.FileMode.Create, System.IO.FileAccess.Write))
             {

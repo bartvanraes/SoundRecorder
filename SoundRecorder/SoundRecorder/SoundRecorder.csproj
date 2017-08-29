@@ -41,6 +41,7 @@
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
+    <Compile Include="Interfaces\IFTPService.cs" />
     <Compile Include="Interfaces\ISoundRecorderService.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Interfaces\IIMUService.cs" />

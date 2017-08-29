@@ -156,6 +156,13 @@ namespace SoundRecorder.Droid
                 lock (_syncLockAccelerometer)
                 {
                     accelerometerX = InterpolationHelper.LinearInterpolation(INTERVAL_MILLISECONDS, _prevInterpolatedTimeStamp, _timeStamp, _prevAccelerometerX, _accelerometerX);
+
+                    //TEST
+                    if(accelerometerX > 20 || accelerometerX < -20)
+                    {
+                        string test = "";
+                    }
+
                     accelerometerY = InterpolationHelper.LinearInterpolation(INTERVAL_MILLISECONDS, _prevInterpolatedTimeStamp, _timeStamp, _prevAccelerometerY, _accelerometerY);
                     accelerometerZ = InterpolationHelper.LinearInterpolation(INTERVAL_MILLISECONDS, _prevInterpolatedTimeStamp, _timeStamp, _prevAccelerometerZ, _accelerometerZ);
                     _prevAccelerometerX = accelerometerX;
@@ -207,7 +214,32 @@ namespace SoundRecorder.Droid
                     TimeStamp = _interpolatedTimeStamp
                 });
             }
-            while (_interpolatedTimeStamp < _prevTimeStamp);
+            while (_interpolatedTimeStamp < _prevTimeStamp.AddMilliseconds(-INTERVAL_MILLISECONDS));
+
+            if(readings.Count > 1)
+            {
+                // If the interpolated values have to 'catch up' with the current values, it's better to put them in sync again...
+                lock (_syncLockAccelerometer)
+                {
+                    _prevAccelerometerX = _accelerometerX;
+                    _prevAccelerometerY = _accelerometerY;
+                    _prevAccelerometerZ = _accelerometerZ;
+                }
+
+                lock (_syncLockGyroscope)
+                {
+                    _prevGyroscopeX = _gyroscopeX;
+                    _prevGyroscopeY = _gyroscopeY;
+                    _prevGyroscopeZ = _gyroscopeZ;
+                }
+
+                lock (_syncLockMagneticField)
+                {
+                    _prevMagneticFieldX = _magneticFieldX;
+                    _prevMagneticFieldY = _magneticFieldY;
+                    _prevMagneticFieldZ = _magneticFieldZ;
+                }
+            }
 
             return readings;
         }
@@ -246,7 +278,16 @@ namespace SoundRecorder.Droid
             }
             finally
             {
+                //TEST
+                //var test = Directory.GetFiles(documentsPath);
+
                 File.Delete(filePath);
+                                
+                filePath = Path.Combine(documentsPath, "testAudio.mp4");
+                File.Delete(filePath);
+
+                //var test2 = Directory.GetFiles(documentsPath);
+
             }
 
             /*var co = new ContentObject(File.OpenRead(filePath), ContentEncoding.Default);

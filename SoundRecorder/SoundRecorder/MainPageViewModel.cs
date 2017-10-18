@@ -209,16 +209,6 @@ namespace SoundRecorder
             StopRecordingCommand = new Command(StopRecording);
         }
 
-        
-
-        /*protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if(PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }*/
-
         private void StartRecording()
         {
             if (!IsRecording)
@@ -242,7 +232,7 @@ namespace SoundRecorder
             {
                 AudioCancellationToken.Token.ThrowIfCancellationRequested();
 
-                await service.StartRecordingAsync(sessionId);
+                await service.StartRecordingAsync(sessionId, RecordingStrategy.AudioRecord);
 
             }
             catch (Exception ex)
@@ -281,12 +271,6 @@ namespace SoundRecorder
                         ReadingsCount = readings.Count;
                     });
 
-                    //TEST
-                    /*if(readings.Any(x => x.AccelerometerX > 20 || x.AccelerometerX < -20))
-                    {
-                        string test = "";
-                    }*/
-
                     readings.ForEach(x =>
                     {
                         imuDTOList.Add(new ImuDTO
@@ -305,17 +289,6 @@ namespace SoundRecorder
                     });
 
                     await Task.Delay(20, IMUCancellationToken.Token);
-
-                    /*await Task.Delay(100, CancellationToken.Token).ContinueWith(async (arg) =>
-                    {
-                        if (!CancellationToken.Token.IsCancellationRequested)
-                        {
-                            CancellationToken.Token.ThrowIfCancellationRequested();
-
-                            
-                        }
-                    });*/
-                    
                 }
                 catch(Exception ex)
                 {

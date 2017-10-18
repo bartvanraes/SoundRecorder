@@ -18,7 +18,7 @@ using SoundRecorder.Droid.Services;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SoundRecorderService))]
 namespace SoundRecorder.Droid.Services
-{
+{   
     public class SoundRecorderService : ISoundRecorderService
     {
         public Action<bool> RecordingStateChanged;
@@ -27,6 +27,7 @@ namespace SoundRecorder.Droid.Services
         private static string documentsPath;
         private byte[] audioBuffer = null;
         private AudioRecord audioRecord = null;
+        private MediaRecorder mediaRecorder = null;
         private bool endRecording = false;
         private bool isRecording = false;
 
@@ -41,14 +42,18 @@ namespace SoundRecorder.Droid.Services
             get { return (isRecording); }
         }
 
-        public async Task StartRecordingAsync(Guid sessionId)
+        public async Task StartRecordingAsync(Guid sessionId, RecordingStrategy strategy)
         {
             filePath = Path.Combine(documentsPath, String.Format("{0}.mp4", sessionId.ToString()));
-            await StartRecorderAsync();
+            await StartRecorderAsync(strategy);
         }
 
         public void StopRecording(Guid sessionId)
         {
+            mediaRecorder.Stop();
+            mediaRecorder.Reset();   // You can reuse the object by going back to setAudioSource() step
+            mediaRecorder.Release(); // Now the object cannot be reused
+
             endRecording = true;
             Thread.Sleep(500); // Give it time to drop out.
         }
@@ -92,35 +97,45 @@ namespace SoundRecorder.Droid.Services
                 RecordingStateChanged(isRecording);
         }
 
-        protected async Task StartRecorderAsync()
+        protected async Task StartRecorderAsync(RecordingStrategy strategy)
         {
             endRecording = false;
             isRecording = true;
 
             RaiseRecordingStateChangedEvent();
 
-            audioBuffer = new Byte[100000];
-            audioRecord = new AudioRecord(
-                // Hardware source of recording.
-                AudioSource.Mic,
-                // Frequency
-                11025,
-                // Mono or stereo
-                ChannelIn.Mono,
-                // Audio encoding
-                Android.Media.Encoding.Pcm16bit,
-                // Length of the audio clip.
-                audioBuffer.Length
-            );
+            switch (strategy) { 
+                case (RecordingStrategy.AudioRecord):
+            
+                audioBuffer = new Byte[100000];
+                audioRecord = new AudioRecord(
+                    // Hardware source of recording.
+                    AudioSource.Mic,
+                    // Frequency
+                    11025,
+                    // Mono or stereo
+                    ChannelIn.Stereo,
+                    // Audio encoding
+                    Android.Media.Encoding.Pcm16bit,
+                    // Length of the audio clip.
+                    audioBuffer.Length
+                );
 
-            audioRecord.StartRecording();
+                audioRecord.StartRecording();
 
-            // Off line this so that we do not block the UI thread.
-            await ReadAudioAsync();
-        }
-
-        
-
-        
-    }
+                // Off line this so that we do not block the UI thread.
+                await ReadAudioAsync();
+                    break;
+                case RecordingStrategy.MediaRecorder:
+                    mediaRecorder = new MediaRecorder();
+                    mediaRecorder.SetAudioSource(AudioSource.Mic);
+                    mediaRecorder.SetOutputFormat(OutputFormat.Default);
+                    mediaRecorder.SetAudioEncoder(AudioEncoder.Aac);
+                    mediaRecorder.SetOutputFile(filePath);
+                    mediaRecorder.Prepare();
+                    mediaRecorder.Start();   // Recording is now started
+                    break;
+            }
+        }        
+    }    
 }

@@ -8,7 +8,13 @@ namespace SoundRecorder.Interfaces
 {
     public interface ISoundRecorderService
     {
-        Task StartRecordingAsync(Guid sessionId);
+        Task StartRecordingAsync(Guid sessionId, RecordingStrategy strategy);
         void StopRecording(Guid sessionId);
+    }
+
+    public enum RecordingStrategy
+    {
+        AudioRecord,
+        MediaRecorder
     }
 }

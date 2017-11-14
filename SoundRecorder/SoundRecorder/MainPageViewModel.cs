@@ -319,7 +319,7 @@ namespace SoundRecorder
         private async void SaveFileAndUploadToFTP(IFileService fileService, IFTPService ftpService)
         {
             fileService.WriteFile(sessionId, imuDTOList);
-            await ftpService.UploadFilesToFTPServer("ftp://files.000webhost.com", sessionId, "bartvanraes", "Dommelke7437", "");
+            await ftpService.UploadFilesToFTPServer("ftp://files.000webhost.com", sessionId, "bartvanraes", "Graspop666", "");
         }
 
         /*private async void SaveFileAndSendEmail(IFileService fileService, IEmailService emailService)
